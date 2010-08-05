@@ -6,6 +6,7 @@ require 'yaml'
 module PinCI 
   class App
     def self.run
+      Validator.validate
       config = Config.new
       file_list = FileList.files(config.filter)
       monitor = Monitor.new(file_list)
@@ -13,6 +14,25 @@ module PinCI
       monitor.add_observer action
       monitor.run
     end 
+  end
+
+  class Validator
+    def self.validate
+      abort_with_error if config_file_missing?
+    end
+
+    private
+    def self.abort_with_error
+      error_message = <<-TEXT
+CI file pin.ci does not exist!
+Exiting...
+        TEXT
+      abort error_message
+    end
+
+    def self.config_file_missing?
+      !((File.exist? "pin.ci") && !(File.directory? "pin.ci"))
+    end
   end
 
   class Config
