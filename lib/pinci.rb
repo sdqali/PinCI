@@ -1,30 +1,46 @@
 #!/bin/env ruby
 
 require 'observer'
+require 'yaml'
+
 module PinCI 
   class App
     def self.run
-     file_list = FileList.new
-     monitor = Monitor.new(file_list)
-     action = Action.new
-     monitor.add_observer action
-     monitor.run
+      config = Config.new
+      file_list = FileList.files(config.filter)
+      monitor = Monitor.new(file_list)
+      action = Action.new(config.exec)
+      monitor.add_observer action
+      monitor.run
     end 
   end
 
+  class Config
+    def initialize
+      @data = YAML.load_file('pin.ci')
+    end
+
+    def filter
+      @data['filter']
+    end
+
+    def exec
+      @data['exec']
+    end
+  end
+
   class FileList
-    def files
+    def self.files(filter)
       #TODO: return a list of absolute paths
-      Dir.glob(File.join("**","*"))
+      Dir.glob(filter)
     end
   end
   
   class Monitor
     include Observable
     
-    def initialize file_list
+    def initialize files
       @files = {}
-      files = file_list.files
       now = Time.now
       files.each do |f|
         @files[f] = now
@@ -41,16 +57,25 @@ module PinCI
             @files[file] = mtime
           end
         end
-        changed
-        notify_observers changed_files
+        if changed_files.length > 0
+          changed
+          notify_observers changed_files
+        end
         sleep 10
       end
     end
   end
   
   class Action
+    def initialize(exec)
+      @exec = exec
+    end
+
     def update changed_files
       puts changed_files
+      puts @exec
+      out = `#{@exec}`
+      puts out
     end 
   end
 end
