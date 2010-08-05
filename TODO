@@ -6,3 +6,6 @@
 6. run a sequence of commands
 7. Use md5 to decide if the file has really changed.
 8. Create filter groups.
+9. Add logging
+10. Save command output to a file on failure
+11. Handle creation of new files
