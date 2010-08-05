@@ -5,3 +5,4 @@
 5. Make the poll interval configurable.
 6. run a sequence of commands
 7. Use md5 to decide if the file has really changed.
+8. Create filter groups.

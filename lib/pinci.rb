@@ -1,21 +1,37 @@
 #!/bin/env ruby
 
 require 'observer'
+require 'yaml'
+
 module PinCI 
   class App
     def self.run
-     file_list = FileList.new
-     monitor = Monitor.new(file_list)
-     action = Action.new
-     monitor.add_observer action
-     monitor.run
+      config = Config.new
+      file_list = FileList.new(config)
+      monitor = Monitor.new(file_list)
+      action = Action.new
+      monitor.add_observer action
+      monitor.run
     end 
   end
 
+  class Config
+    def initialize
+      @data = YAML.load_file('.ci')
+    end
+
+    def filter
+      @data['filter']
+    end
+  end
+
   class FileList
+    def initialize(config)
+      @config = config
+    end
     def files
       #TODO: return a list of absolute paths
-      Dir.glob(File.join("**","*"))
+      Dir.glob(@config.filter)
     end
   end
   
