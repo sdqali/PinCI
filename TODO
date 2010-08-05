@@ -10,3 +10,4 @@
 10. Save command output to a file on failure
 11. Handle creation of new files
 12. Validate that a config file exists [DONE]
+13. Start writing specs.
