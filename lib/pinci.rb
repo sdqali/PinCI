@@ -3,6 +3,8 @@
 require 'observer'
 require 'yaml'
 
+CONFIG_FILE = "pin.ci"
+
 module PinCI 
   class App
     def self.run
@@ -31,13 +33,13 @@ Exiting...
     end
 
     def self.config_file_missing?
-      !((File.exist? "pin.ci") && !(File.directory? "pin.ci"))
+      !((File.exist? CONFIG_FILE) && !(File.directory? CONFIG_FILE))
     end
   end
 
   class Config
     def initialize
-      @data = YAML.load_file('pin.ci')
+      @data = YAML.load_file(CONFIG_FILE)
     end
 
     def filter
