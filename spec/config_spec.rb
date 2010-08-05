@@ -1,9 +1,10 @@
 require 'rubygems'
 require File.dirname(__FILE__)+'/../lib/pinci/pinci.rb'
 
+Config = PinCI::Config
+
 include PinCI
 describe Config do
-  before { Config = PinCI::Config}
   context "valid config" do
     it "parses filter" do
       Dir.chdir 'spec/data/valid-config' do
