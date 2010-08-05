@@ -20,9 +20,15 @@ describe Config do
   end
 
   context "invalid config" do
-    it "should throw error" do
+    it "should throw error while parsing filter" do
       Dir.chdir 'spec/data/invalid-config' do
         lambda {Config.new.filter}.should raise_error
+      end
+    end
+
+    it "should throw error while parsing exec" do
+      Dir.chdir 'spec/data/invalid-config' do
+        lambda {Config.new.exec}.should raise_error
       end
     end
   end
