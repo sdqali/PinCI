@@ -17,7 +17,7 @@ module PinCI
 
   class Config
     def initialize
-      @data = YAML.load_file('.ci')
+      @data = YAML.load_file('pin.ci')
     end
 
     def filter
