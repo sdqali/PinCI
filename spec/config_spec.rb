@@ -17,4 +17,12 @@ describe Config do
       end
     end
   end
+
+  context "invalid config" do
+    it "should throw error" do
+      Dir.chdir 'spec/data/invalid-config' do
+        lambda {Config.new.filter}.should raise_error
+      end
+    end
+  end
 end
