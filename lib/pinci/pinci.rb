@@ -101,5 +101,3 @@ Exiting...
     end 
   end
 end
-
-PinCI::App.run
