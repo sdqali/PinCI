@@ -33,7 +33,7 @@ Exiting...
     end
 
     def self.config_file_missing?
-      !((File.exist? CONFIG_FILE) && !(File.directory? CONFIG_FILE))
+      !(File.exist? CONFIG_FILE) || (File.directory? CONFIG_FILE)
     end
   end
 
