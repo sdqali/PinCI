@@ -2,7 +2,7 @@
 2. filter the list of files to be monitored for changes [DONE]
 3. execute a command from the config file [DONE]
 4. Add more than one filter [DONE]
-5. Make the poll interval configurable.
+5. Make the poll interval configurable. [DONE]
 6. run a sequence of commands
 7. Use md5 to decide if the file has really changed.
 8. Create filter groups.
@@ -11,3 +11,4 @@
 11. Handle creation of new files
 12. Validate that a config file exists [DONE]
 13. Start writing specs.
+

@@ -1,2 +1,4 @@
 filter: "**/*"
 exec: "ls -la"
+poll: 10
+

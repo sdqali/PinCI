@@ -15,7 +15,7 @@ module PinCI
       monitor = Monitor.new(file_list)
       action = Action.new(config.exec)
       monitor.add_observer action
-      monitor.run
+      monitor.run config.poll_interval
     end 
   end
 
@@ -50,6 +50,10 @@ Exiting...
     def exec
       @data['exec']
     end
+
+    def poll_interval
+      @data['poll']
+    end
   end
 
   class FileList
@@ -75,7 +79,7 @@ Exiting...
       end
     end
 
-    def run
+    def run(poll_interval)
       while true do
         changed_files = []
         @files.each_key do |file|
@@ -89,7 +93,7 @@ Exiting...
           changed
           notify_observers changed_files
         end
-        sleep 10
+        sleep poll_interval
       end
     end
   end
@@ -107,3 +111,5 @@ Exiting...
     end 
   end
 end
+
+PinCI::App.run
