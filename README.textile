@@ -1,0 +1,4 @@
+h1. PinCI: PinCI is not CI
+
+PinCi is a minimal file monitor that executes a command whenever any of the
+files it's monitoring changes.
