@@ -2,6 +2,7 @@
 
 require 'observer'
 require 'yaml'
+require "pp"
 
 CONFIG_FILE = "pin.ci"
 
@@ -54,7 +55,12 @@ Exiting...
   class FileList
     def self.files(filter)
       #TODO: return a list of absolute paths
-      Dir.glob(filter)
+      return Dir.glob(filter) unless filter.class == Array 
+      files = []
+      filter.each do |f|
+        files += Dir.glob(f)
+      end
+      return files
     end
   end
   
