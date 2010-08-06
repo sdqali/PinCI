@@ -1,7 +1,7 @@
 1. list the name of a file that has changed - use mtime to decide if a change has occurred [DONE]
-2. filter the list of files to be monitored for changes
-3. execute a command from the config file
-4. Add more than one filter
+2. filter the list of files to be monitored for changes [DONE]
+3. execute a command from the config file [DONE]
+4. Add more than one filter [DONE]
 5. Make the poll interval configurable.
 6. run a sequence of commands
 7. Use md5 to decide if the file has really changed.
